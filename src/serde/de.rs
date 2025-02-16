@@ -37,7 +37,7 @@ mod inner {
 }
 pub use inner::deserialize;
 
-enum SerdeDecoder<'a> {
+pub enum SerdeDecoder<'a> {
     Bool(BoolDecoder<'a>),
     Enum((VariantDecoder<'a>, Vec<SerdeDecoder<'a>>)), // (variants, values)
     F32(F32Decoder<'a>),
@@ -104,9 +104,9 @@ impl<'a> View<'a> for SerdeDecoder<'a> {
     }
 }
 
-struct DecoderWrapper<'a, 'de> {
-    decoder: &'a mut SerdeDecoder<'de>,
-    input: &'a mut &'de [u8],
+pub struct DecoderWrapper<'a, 'de> {
+    pub decoder: &'a mut SerdeDecoder<'de>,
+    pub input: &'a mut &'de [u8],
 }
 
 macro_rules! specify {
